@@ -12,11 +12,11 @@
 	programs.bash = {
 		enable = true;
 		shellAliases = {
-			dotfiles = "cd /etc/nixos/home/dotfiles/";
-			home = "cd /etc/nixos/home/";
-			hyprlandConf = "sudo vim /etc/nixos/home/dotfiles/hypr/hyprland.conf";
+			dotfiles = "cd ~/nixos/home/dotfiles";
+			home = "cd ~/nixos/home";
+			hconf = "sudo vim ~/nixos/home/dotfiles/hypr/hyprland.conf";
+			test = "echo testing alias";
 		};
-		# profileExtra = "exec start-hyprland";
 	};
 
 	home.file.".config/hypr/hyprland.conf".source = ./dotfiles/hypr/hyprland.conf;
