@@ -7,7 +7,7 @@
     ];
 
   networking.networkmanager.enable = true;
-  hardware.bluetooth.enable =true;
+  hardware.bluetooth.enable = true;
   programs.hyprland.enable = true;
   programs.nh = {
     enable = true;

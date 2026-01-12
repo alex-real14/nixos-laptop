@@ -15,7 +15,6 @@
 			dotfiles = "cd ~/nixos/home/dotfiles";
 			home = "cd ~/nixos/home";
 			hconf = "sudo vim ~/nixos/home/dotfiles/hypr/hyprland.conf";
-			test = "echo testing alias";
 		};
 	};
 
