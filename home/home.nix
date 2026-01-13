@@ -19,6 +19,16 @@
 		};
 	};
 
-	home.file.".config/hypr/hyprland.conf".source = ./dotfiles/hypr/hyprland.conf;
-	home.file.".config/ghostty/config.ghostty".source = ./dotfiles/ghostty/config.ghostty;
+	xdg.configFile."hypr" = {
+		source = config.lib.file.mkOutOfStoreSymlink
+		"${config.home.homeDirectory}/.config/hypr";
+		recursive = true;
+	};
+
+	xdg.configFile."ghostty" = {
+		source = config.lib.file.mkOutOfStoreSymlink
+		"${config.home.homeDirectory}/.config/ghostty";
+		recursive = true;
+	};
+
 }	
