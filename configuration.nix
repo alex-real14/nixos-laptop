@@ -9,16 +9,10 @@
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
   programs.hyprland.enable = true;
-  programs.nh = {
-    enable = true;
-    clean.enable = true;
-    clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "/home/alex/nixos";
-  };
 
   services.upower.enable = true;
   services.tuned.enable = true;
-  # services.getty.autologinUser = "alex";
+  services.getty.autologinUser = "alex";
 
   environment.systemPackages = with pkgs; [
     brightnessctl
@@ -41,9 +35,8 @@
     packages = with pkgs; [
       tree
     ];
+    hashedPassword = "$6$lKdEFcfszNGlSUyI$U.Q65H0q4xj7wSZ59zAOrlIvf8I1RkoqnS8KDEQOD9PZiDWv3mk0W2abXCsLhIRvlehHOetIGcEKPruhT7Agm/";
   };
 
   system.stateVersion = "25.11"; # DO NOT CHANGE
 }
-
-

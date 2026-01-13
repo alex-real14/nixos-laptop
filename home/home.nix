@@ -14,7 +14,8 @@
 		shellAliases = {
 			dotfiles = "cd ~/nixos/home/dotfiles";
 			home = "cd ~/nixos/home";
-			hconf = "sudo vim ~/nixos/home/dotfiles/hypr/hyprland.conf";
+			nixos = "cd ~/nixos";
+			hconf = "vim ~/nixos/home/dotfiles/hypr/hyprland.conf";
 		};
 	};
 
