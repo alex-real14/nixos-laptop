@@ -9,7 +9,7 @@
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "${builtins.getEnv "HOME"}/nixos";
+    flake = "/home/alex/nixos";
   };
 
 programs.ssh = {
@@ -39,15 +39,33 @@ programs.git = {
   };
 };
 
-  services.ssh-agent.enable = true;
+home.sessionVariables = {
+  GTK_THEME = "Adwaita:dark"; # GTK dark theme
+};
+
+programs.chromium = {
+  enable = true;
+};
+
+services.ssh-agent.enable = true;
+
+programs.vim.enable = true;
+programs.yazi.enable = true;
+
+# programs.ghostty = {
+#  enable = true;
+
+ # settings = {
+ #   theme = "TokyoNight Moon";
+  #  font-size = 10;
+ # };
+
+#enableBashIntegration = true;
 
   home.packages = with pkgs; [
     clipse
-    chromium
     ghostty
     hyprpolkitagent
-    vim
-    yazi
   ];
 }
 

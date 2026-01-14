@@ -9,6 +9,8 @@
 		./packages.nix
 	];
 
+	xdg.enable = true;
+
 	programs.bash = {
 		enable = true;
 		shellAliases = {
