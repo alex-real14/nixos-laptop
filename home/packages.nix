@@ -49,22 +49,24 @@ programs.chromium = {
 
 services.ssh-agent.enable = true;
 
-programs.vim.enable = true;
+programs.vim = {
+  enable = true;
+  defaultEditor = true;
+};
+
 programs.yazi.enable = true;
 
-# programs.ghostty = {
-#  enable = true;
-
- # settings = {
- #   theme = "TokyoNight Moon";
-  #  font-size = 10;
- # };
-
-#enableBashIntegration = true;
+programs.ghostty = {
+  enable = true;
+  settings = {
+    theme = "TokyoNight Moon";
+    font-family = "FreeMono";
+    font-size = 12;
+  };
+};
 
   home.packages = with pkgs; [
     clipse
-    ghostty
     hyprpolkitagent
   ];
 }

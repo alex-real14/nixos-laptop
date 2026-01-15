@@ -4,7 +4,7 @@
 	home.username = "alex";
 	home.homeDirectory = "/home/alex";
 	home.stateVersion = "25.11";
-	
+
 	imports = [
 		./packages.nix
 	];
@@ -26,8 +26,8 @@
 		recursive = true;
 	};
 
-	xdg.configFile."ghostty" = {
-		source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos/home/dotfiles/ghostty";
-		recursive = true;
-	};
+#	xdg.configFile."ghostty" = {
+#		source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos/home/dotfiles/ghostty";
+#		recursive = true;
+#	};
 }	
