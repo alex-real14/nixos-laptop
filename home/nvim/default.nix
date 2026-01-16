@@ -7,12 +7,21 @@
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
+
+    plugins = with pkgs.vimPlugins; [
+      tokyonight-nvim
+      nvim-treesitter.withAllGrammars
+    ];
   };
 
-  xdg.configFile."nvim/lua/options.lua".source = ./lua/options.lua;
+	xdg.configFile."nvim/lua".source = ./lua;
 
   xdg.configFile."nvim/init.lua".text = ''
     require("options")
+    require("treesitter")
+
+    vim.o.termguicolors = true
+    vim.cmd("colorscheme tokyonight-storm")
   '';
 }
 
