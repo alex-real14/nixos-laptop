@@ -1,26 +1,73 @@
-{ pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  programs.neovim = {
+  imports = [ inputs.nvf.homeManagerModules.default ];
+
+  programs.nvf = {
     enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
+    settings = {
+      vim.viAlias = true;
+      vim.vimAlias = true;
+      vim.globals.mapleader = " ";
+      vim.theme = {
+        enable = true;
+        name = "tokyonight";
+        style = "storm";
+      };
 
-    plugins = with pkgs.vimPlugins; [
-      tokyonight-nvim
-      nvim-treesitter.withAllGrammars
-    ];
+      vim.lsp = {
+        enable = true; # Fixed rename from enableLSP
+        formatOnSave = true;
+      };
 
-    extraLuaConfig = ''
-      require("options")
-      require("treesitter")
+      vim.languages = {
+        enableTreesitter = true;
+        # Removed enableLSP from here as it's now under vim.lsp.enable
 
-      vim.o.termguicolors = true
-      vim.cmd("colorscheme tokyonight-storm")
-    '';
+        nix = {
+          enable = true;
+          format = {
+            enable = true;
+            type = [ "nixfmt" ]; # Changed to list
+          };
+          lsp = {
+            enable = true;
+            servers = [ "nixd" ]; # Renamed to servers and changed to list
+          };
+        };
+
+        markdown.enable = true;
+        bash.enable = true;
+      };
+
+      vim.statusline.lualine.enable = true;
+      vim.telescope.enable = true;
+      vim.autocomplete.nvim-cmp.enable = true;
+      vim.filetree.neo-tree.enable = true;
+
+      vim.luaConfigRC.options = builtins.readFile ./lua/options.lua;
+
+      vim.keymaps = [
+        {
+          key = "<leader>e";
+          mode = "n";
+          action = ":Neotree toggle<CR>";
+          silent = true;
+          desc = "Toggle Tree Explorer";
+        }
+        {
+          key = "<leader>ff";
+          mode = "n";
+          action = ":Telescope find_files<CR>";
+          silent = true;
+          desc = "Find Files";
+        }
+      ];
+    };
   };
-
-  xdg.configFile."nvim/lua".source = ./lua;
 }

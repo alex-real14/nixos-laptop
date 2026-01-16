@@ -1,10 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
@@ -14,29 +18,30 @@
   services.tuned.enable = true;
   # services.getty.autologinUser = "alex";
   # programs.regreet.enable = true;
-services.greetd = {
-  enable = true;
+  services.greetd = {
+    enable = true;
 
-  settings = {
-    default_session = {
-      command = "start-hyprland";
-      user = "alex";
-    };
+    settings = {
+      default_session = {
+        command = "start-hyprland";
+        user = "alex";
+      };
 
-    greeters = [ {
-      enable = true;
-      package = pkgs.tuigreet;
-      # Optional extra args for tuigreet:
-      extraArgs = [
-        "--remember"  # remembers last user
-        "--greeting" "Welcome, Alex!"
-        "--time"
+      greeters = [
+        {
+          enable = true;
+          package = pkgs.tuigreet;
+          # Optional extra args for tuigreet:
+          extraArgs = [
+            "--remember" # remembers last user
+            "--greeting"
+            "Welcome, Alex!"
+            "--time"
+          ];
+        }
       ];
-    }];
+    };
   };
-};
- 
-
 
   environment.systemPackages = with pkgs; [
     brightnessctl
@@ -46,7 +51,10 @@ services.greetd = {
 
   nixpkgs.config.allowUnfree = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
