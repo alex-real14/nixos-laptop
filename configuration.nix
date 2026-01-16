@@ -12,7 +12,31 @@
 
   services.upower.enable = true;
   services.tuned.enable = true;
-  services.getty.autologinUser = "alex";
+  # services.getty.autologinUser = "alex";
+  # programs.regreet.enable = true;
+services.greetd = {
+  enable = true;
+
+  settings = {
+    default_session = {
+      command = "start-hyprland";
+      user = "alex";
+    };
+
+    greeters = [ {
+      enable = true;
+      package = pkgs.tuigreet;
+      # Optional extra args for tuigreet:
+      extraArgs = [
+        "--remember"  # remembers last user
+        "--greeting" "Welcome, Alex!"
+        "--time"
+      ];
+    }];
+  };
+};
+ 
+
 
   environment.systemPackages = with pkgs; [
     brightnessctl

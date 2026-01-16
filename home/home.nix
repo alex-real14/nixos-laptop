@@ -6,7 +6,8 @@
 	home.stateVersion = "25.11";
 
 	imports = [
-		./packages.nix
+          ./packages.nix
+	  ./nvim
 	];
 
 	xdg.enable = true;
@@ -25,9 +26,4 @@
 		source = config.lib.file.mkOutOfStoreSymlink "/home/alex/nixos/home/dotfiles/hypr";
 		recursive = true;
 	};
-
-#	xdg.configFile."ghostty" = {
-#		source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos/home/dotfiles/ghostty";
-#		recursive = true;
-#	};
 }	

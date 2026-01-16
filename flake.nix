@@ -7,7 +7,7 @@
 		home-manager = {
 			url = "github:nix-community/home-manager";
 			inputs.nixpkgs.follows = "nixpkgs";
-		};
+                };
 	};
 
 	outputs = inputs@{self, nixpkgs, home-manager, ... }: {
@@ -19,7 +19,11 @@
 					home-manager = {
 						useGlobalPkgs = true;
 						useUserPackages = true;
-						users.alex = import ./home/home.nix;
+						users.alex = {
+                                                  imports = [
+                                                  ./home/home.nix
+                                                  ];
+                                                };
 						backupFileExtension = "backup";
 					};
 				}
