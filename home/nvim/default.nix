@@ -12,16 +12,15 @@
       tokyonight-nvim
       nvim-treesitter.withAllGrammars
     ];
+
+    extraLuaConfig = ''
+      require("options")
+      require("treesitter")
+
+      vim.o.termguicolors = true
+      vim.cmd("colorscheme tokyonight-storm")
+    '';
   };
 
-	xdg.configFile."nvim/lua".source = ./lua;
-
-  xdg.configFile."nvim/init.lua".text = ''
-    require("options")
-    require("treesitter")
-
-    vim.o.termguicolors = true
-    vim.cmd("colorscheme tokyonight-storm")
-  '';
+  xdg.configFile."nvim/lua".source = ./lua;
 }
-
