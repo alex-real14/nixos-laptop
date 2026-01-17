@@ -9,10 +9,14 @@
   home.username = "alex";
   home.homeDirectory = "/home/alex";
   home.stateVersion = "25.11";
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+  };
 
   imports = [
     ./packages.nix
-    ./nvim
+    ./nvf
   ];
 
   xdg.enable = true;
