@@ -1,14 +1,54 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
+
 {
+  services.hyprlauncher = {
+    enable = true;
+    settings = {
+      "General" = {
+        # This points hyprlauncher to your theme file
+        theme = "${config.home.homeDirectory}/.config/hypr/theme.hl";
+        grab_focus = true;
+      };
+
+      "UI" = {
+        window_size = "600 400";
+      };
+
+      "Finders" = {
+        default_finder = "desktop";
+        math_prefix = "=";
+        unicode_prefix = ".";
+        desktop_icons = true;
+      };
+
+      "Cache" = {
+        enabled = true;
+      };
+    };
+  };
+
+  services.ssh-agent.enable = true;
+
   programs.television.enable = true;
   programs.btop.enable = true;
   programs.quickshell.enable = true;
+  xdg.enable = true;
 
   programs.nh = {
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
     flake = "/home/alex/nixos";
+  };
+
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+      dotfiles = "cd ~/nixos/home/dotfiles";
+      home = "cd ~/nixos/home";
+      nixos = "cd ~/nixos";
+      hconf = "vim ~/nixos/home/dotfiles/hypr/hyprland.conf";
+    };
   };
 
   programs.ssh = {
@@ -42,8 +82,6 @@
     enable = true;
   };
 
-  services.ssh-agent.enable = true;
-
   programs.yazi = {
     enable = true;
     shellWrapperName = "y";
@@ -53,11 +91,12 @@
     enable = true;
     settings = {
       theme = "TokyoNight Storm";
-      font-size = 12;
+      font-size = 11;
     };
   };
 
   home.packages = with pkgs; [
+    bluetui
     clipse
     hyprpolkitagent
   ];

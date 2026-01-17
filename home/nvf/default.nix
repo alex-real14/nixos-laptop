@@ -21,23 +21,22 @@
       };
 
       vim.lsp = {
-        enable = true; # Fixed rename from enableLSP
+        enable = true;
         formatOnSave = true;
       };
 
       vim.languages = {
         enableTreesitter = true;
-        # Removed enableLSP from here as it's now under vim.lsp.enable
 
         nix = {
           enable = true;
           format = {
             enable = true;
-            type = [ "nixfmt" ]; # Changed to list
+            type = [ "nixfmt" ];
           };
           lsp = {
             enable = true;
-            servers = [ "nixd" ]; # Renamed to servers and changed to list
+            servers = [ "nixd" ];
           };
         };
 
