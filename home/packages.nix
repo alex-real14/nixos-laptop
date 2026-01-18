@@ -2,7 +2,7 @@
 
 {
   services.hyprlauncher = {
-    enable = true;
+    enable = false;
     settings = {
       "General" = {
         # This points hyprlauncher to your theme file
