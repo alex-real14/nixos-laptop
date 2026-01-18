@@ -27,6 +27,8 @@
     };
   };
 
+  programs.bat.enable = true;
+
   services.ssh-agent.enable = true;
 
   programs.television.enable = true;
