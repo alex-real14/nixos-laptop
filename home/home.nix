@@ -1,20 +1,17 @@
 { config, ... }:
 
 let
-  dotfilesPath = "${config.home.homeDirectory}/nixos/home/dotfiles";
-
-  createSymlink = path: config.lib.file.mkOutOfStoreSymlink path;
-
-  configFiles = {
-    "hypr" = "hypr";
-    "ghostty" = "ghostty";
+  dotfiles = "${config.home.homeDirectory}/dotfiles";
+  create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+  configs = {
+    hypr = "hypr";
+    ghostty = "ghostty";
   };
 in
 {
   home.username = "alex";
   home.homeDirectory = "/home/alex";
   home.stateVersion = "25.11";
-
   home.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
@@ -26,9 +23,8 @@ in
   ];
 
   xdg.configFile = builtins.mapAttrs (name: subpath: {
-    source = createSymlink "${dotfilesPath}/${subpath}";
-    # recursive = true;
-  }) configFiles;
+    source = create_symlink "${dotfiles}/${subpath}";
+    recursive = true;
+  }) configs;
 
-  xdg.enable = true;
 }

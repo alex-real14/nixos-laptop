@@ -1,4 +1,0 @@
-theme = TokyoNight Storm
-font-size = 11
-command = /home/alex/.nix-profile/bin/nu -c fastfetch
-shell-integration = none

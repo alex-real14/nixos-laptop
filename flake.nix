@@ -33,7 +33,6 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              # Removed the redundant 'home-manager.' prefix here
               extraSpecialArgs = { inherit inputs; };
               users.alex = {
                 imports = [ ./home/home.nix ];

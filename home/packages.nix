@@ -16,6 +16,8 @@
     flake = "/home/alex/nixos";
   };
 
+  programs.kitty.enable = true;
+
   programs.nushell = {
     enable = true;
     shellAliases = {
@@ -28,15 +30,6 @@
 
   programs.bash = {
     enable = true;
-    profileExtra = ''
-      if ! [ "$TERM" = "dumb" ] && [ -z "$BASH_EXECUTION_STRING" ]; then
-        # Start Hyprland if not already running
-        if [ -z "$HYPRLAND_INSTANCE_SIGNATURE" ]; then
-          start-hyprland
-        fi
-        exec nu
-      fi
-    '';
   };
 
   programs.starship = {
