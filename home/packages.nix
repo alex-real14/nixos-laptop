@@ -1,32 +1,6 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  services.hyprlauncher = {
-    enable = false;
-    settings = {
-      "General" = {
-        # This points hyprlauncher to your theme file
-        theme = "${config.home.homeDirectory}/.config/hypr/theme.hl";
-        grab_focus = true;
-      };
-
-      "UI" = {
-        window_size = "600 400";
-      };
-
-      "Finders" = {
-        default_finder = "desktop";
-        math_prefix = "=";
-        unicode_prefix = ".";
-        desktop_icons = true;
-      };
-
-      "Cache" = {
-        enabled = true;
-      };
-    };
-  };
-
   programs.bat.enable = true;
 
   services.ssh-agent.enable = true;
@@ -34,7 +8,6 @@
   programs.television.enable = true;
   programs.btop.enable = true;
   programs.quickshell.enable = true;
-  xdg.enable = true;
 
   programs.nh = {
     enable = true;
@@ -43,14 +16,77 @@
     flake = "/home/alex/nixos";
   };
 
-  programs.bash = {
+  programs.nushell = {
     enable = true;
-    profileExtra = "exec start-hyprland fi";
     shellAliases = {
       dotfiles = "cd ~/nixos/home/dotfiles";
       home = "cd ~/nixos/home";
       nixos = "cd ~/nixos";
       hconf = "vim ~/nixos/home/dotfiles/hypr/hyprland.conf";
+    };
+  };
+
+  programs.bash = {
+    enable = true;
+    profileExtra = ''
+      if ! [ "$TERM" = "dumb" ] && [ -z "$BASH_EXECUTION_STRING" ]; then
+        # Start Hyprland if not already running
+        if [ -z "$HYPRLAND_INSTANCE_SIGNATURE" ]; then
+          start-hyprland
+        fi
+        exec nu
+      fi
+    '';
+  };
+
+  programs.starship = {
+    enable = false;
+    enableZshIntegration = true;
+    settings = {
+      # Define the Tokyo Night Storm Palette
+      palette = "tokyo_night";
+
+      palettes.tokyo_night = {
+        background = "#24283b";
+        foreground = "#c0caf5";
+        black = "#414868";
+        red = "#f7768e";
+        green = "#9ece6a";
+        yellow = "#e0af68";
+        blue = "#7aa2f7";
+        magenta = "#bb9af7";
+        cyan = "#7dcfff";
+        white = "#a9b1d6";
+        orange = "#ff9e64";
+      };
+
+      # Apply colors to the prompt
+      character = {
+        success_symbol = "[❯](bold blue)"; # Tokyo Night Blue Chevron
+        error_symbol = "[❯](bold red)"; # Red on error
+        vicmd_symbol = "[❮](bold magenta)"; # Purple for Vi mode
+      };
+
+      directory = {
+        style = "bold cyan";
+        truncation_length = 3;
+        truncation_symbol = "…/";
+      };
+
+      git_branch = {
+        symbol = " ";
+        style = "bold magenta";
+      };
+
+      git_status = {
+        style = "bold red";
+      };
+
+      nix_shell = {
+        symbol = "❄️ ";
+        style = "bold blue";
+        format = "via [$symbol$state( \($name\))]($style) ";
+      };
     };
   };
 
@@ -81,26 +117,19 @@
     };
   };
 
-  programs.chromium = {
-    enable = true;
-  };
-
   programs.yazi = {
     enable = true;
     shellWrapperName = "y";
   };
 
-  programs.ghostty = {
-    enable = true;
-    settings = {
-      theme = "TokyoNight Storm";
-      font-size = 11;
-    };
-  };
+  programs.fastfetch.enable = true;
+
+  # programs.ghostty.enable = true;
 
   home.packages = with pkgs; [
     bluetui
     clipse
+    ghostty
     hyprpolkitagent
   ];
 }

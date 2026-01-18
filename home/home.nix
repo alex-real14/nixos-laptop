@@ -1,12 +1,20 @@
-{
-  config,
-  ...
-}:
+{ config, ... }:
 
+let
+  dotfilesPath = "${config.home.homeDirectory}/nixos/home/dotfiles";
+
+  createSymlink = path: config.lib.file.mkOutOfStoreSymlink path;
+
+  configFiles = {
+    "hypr" = "hypr";
+    "ghostty" = "ghostty";
+  };
+in
 {
   home.username = "alex";
   home.homeDirectory = "/home/alex";
   home.stateVersion = "25.11";
+
   home.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
@@ -17,9 +25,10 @@
     ./nvf
   ];
 
-  xdg.configFile."hypr" = {
-    source = config.lib.file.mkOutOfStoreSymlink "/home/alex/nixos/home/dotfiles/hypr";
-    recursive = true;
-  };
+  xdg.configFile = builtins.mapAttrs (name: subpath: {
+    source = createSymlink "${dotfilesPath}/${subpath}";
+    # recursive = true;
+  }) configFiles;
 
+  xdg.enable = true;
 }

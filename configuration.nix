@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -14,12 +11,21 @@
 
   programs.hyprland.enable = true;
 
+  programs.chromium = {
+    enable = true;
+    extensions = [
+      "pgbjifpikialeahbdendkjioeafbmfkn" # Tokyo Night Storm Theme
+      "ddkjiahejlhfcafbddmgiahcphecmpfh" # uBlock Origin Lite
+    ];
+  };
+
   services.upower.enable = true;
   services.tuned.enable = true;
   services.getty.autologinUser = "alex";
 
   environment.systemPackages = with pkgs; [
     brightnessctl
+    chromium
     git
     wget
   ];
@@ -35,7 +41,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos-laptop";
-
   time.timeZone = "America/New_York";
 
   users.users.alex = {
