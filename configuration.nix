@@ -1,6 +1,4 @@
 {
-  config,
-  lib,
   pkgs,
   ...
 }:
@@ -11,37 +9,14 @@
   ];
 
   networking.networkmanager.enable = true;
+
   hardware.bluetooth.enable = true;
+
   programs.hyprland.enable = true;
 
   services.upower.enable = true;
   services.tuned.enable = true;
-  # services.getty.autologinUser = "alex";
-  # programs.regreet.enable = true;
-  services.greetd = {
-    enable = true;
-
-    settings = {
-      default_session = {
-        command = "start-hyprland";
-        user = "alex";
-      };
-
-      greeters = [
-        {
-          enable = true;
-          package = pkgs.tuigreet;
-          # Optional extra args for tuigreet:
-          extraArgs = [
-            "--remember" # remembers last user
-            "--greeting"
-            "Welcome, Alex!"
-            "--time"
-          ];
-        }
-      ];
-    };
-  };
+  services.getty.autologinUser = "alex";
 
   environment.systemPackages = with pkgs; [
     brightnessctl
@@ -69,7 +44,6 @@
     packages = with pkgs; [
       tree
     ];
-    hashedPassword = "$6$lKdEFcfszNGlSUyI$U.Q65H0q4xj7wSZ59zAOrlIvf8I1RkoqnS8KDEQOD9PZiDWv3mk0W2abXCsLhIRvlehHOetIGcEKPruhT7Agm/";
   };
 
   system.stateVersion = "25.11"; # DO NOT CHANGE

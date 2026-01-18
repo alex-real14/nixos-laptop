@@ -45,6 +45,7 @@
 
   programs.bash = {
     enable = true;
+    profileExtra = "exec start-hyprland fi";
     shellAliases = {
       dotfiles = "cd ~/nixos/home/dotfiles";
       home = "cd ~/nixos/home";
