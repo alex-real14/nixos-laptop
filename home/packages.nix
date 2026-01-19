@@ -76,7 +76,7 @@
       # -------------------------
       directory = {
         style = "bold cyan";
-        truncation_length = 3;
+        truncation_length = 5;
         truncation_symbol = "…/";
         read_only = " ";
         read_only_style = "red";
