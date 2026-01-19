@@ -1,13 +1,5 @@
-{ config, ... }:
+{ config, lib, ... }:
 
-let
-  dotfiles = "${config.home.homeDirectory}/dotfiles";
-  create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
-  configs = {
-    hypr = "hypr";
-    ghostty = "ghostty";
-  };
-in
 {
   home.username = "alex";
   home.homeDirectory = "/home/alex";
@@ -22,9 +14,8 @@ in
     ./nvf
   ];
 
-  xdg.configFile = builtins.mapAttrs (name: subpath: {
-    source = create_symlink "${dotfiles}/${subpath}";
-    recursive = true;
-  }) configs;
+  home.file.".config/hypr/hyprland.conf".source = ./dotfiles/hypr/hyprland.conf;
+
+  home.file.".config/ghostty/config".source = ./dotfiles/ghostty/config;
 
 }

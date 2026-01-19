@@ -20,6 +20,9 @@
 
   programs.nushell = {
     enable = true;
+    settings = {
+      show_banner = false;
+    };
     shellAliases = {
       dotfiles = "cd ~/nixos/home/dotfiles";
       home = "cd ~/nixos/home";
@@ -28,15 +31,21 @@
     };
   };
 
-  programs.bash = {
-    enable = true;
-  };
-
   programs.starship = {
-    enable = false;
-    enableZshIntegration = true;
+    enable = true;
+    enableNushellIntegration = true;
+
     settings = {
-      # Define the Tokyo Night Storm Palette
+      # -------------------------
+      # Layout
+      # -------------------------
+      add_newline = true;
+
+      format = "$directory$git_branch$git_status$nix_shell$character";
+
+      # -------------------------
+      # Tokyo Night Storm Palette
+      # -------------------------
       palette = "tokyo_night";
 
       palettes.tokyo_night = {
@@ -53,32 +62,56 @@
         orange = "#ff9e64";
       };
 
-      # Apply colors to the prompt
+      # -------------------------
+      # Prompt Character
+      # -------------------------
       character = {
-        success_symbol = "[❯](bold blue)"; # Tokyo Night Blue Chevron
-        error_symbol = "[❯](bold red)"; # Red on error
-        vicmd_symbol = "[❮](bold magenta)"; # Purple for Vi mode
+        success_symbol = "[❯](bold blue)";
+        error_symbol = "[❯](bold red)";
+        vicmd_symbol = "[❮](bold magenta)";
       };
 
+      # -------------------------
+      # Directory (bottom line)
+      # -------------------------
       directory = {
         style = "bold cyan";
         truncation_length = 3;
         truncation_symbol = "…/";
+        read_only = " ";
+        read_only_style = "red";
       };
 
+      # -------------------------
+      # Nix Shell (top line)
+      # -------------------------
+      nix_shell = {
+        symbol = "❄ ";
+        style = "bold blue";
+        format = "[$symbol$state( \\($name\\))]($style) ";
+      };
+
+      # -------------------------
+      # Git (top line)
+      # -------------------------
       git_branch = {
         symbol = " ";
-        style = "bold magenta";
+        style = "magenta";
       };
 
       git_status = {
-        style = "bold red";
-      };
-
-      nix_shell = {
-        symbol = "❄️ ";
-        style = "bold blue";
-        format = "via [$symbol$state( \($name\))]($style) ";
+        style = "yellow";
+        format = "([$all_status$ahead_behind]($style))";
+        conflicted = "≠";
+        ahead = "⇡";
+        behind = "⇣";
+        diverged = "⇕";
+        untracked = "?";
+        stashed = "$";
+        modified = "!";
+        staged = "+";
+        renamed = "»";
+        deleted = "✘";
       };
     };
   };

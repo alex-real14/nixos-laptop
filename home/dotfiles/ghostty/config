@@ -1,2 +1,4 @@
 theme = TokyoNight Storm
 font-size = 11
+shell-integration = none
+# command = "direct:/etc/profiles/per-user/alex/bin/nu"
