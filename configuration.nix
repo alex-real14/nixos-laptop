@@ -19,6 +19,15 @@
     ];
   };
 
+  programs.bash = {
+    enable = true;
+    loginShellInit = ''
+      if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
+        exec Hyprland
+      fi
+    '';
+  };
+
   services.upower.enable = true;
   services.tuned.enable = true;
   services.getty.autologinUser = "alex";
