@@ -1,6 +1,23 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
+let
+  envVars = import ./env-vars.nix;
+in
 {
+  imports = [
+    inputs.walker.homeManagerModules.default
+  ];
+
+  programs.walker = {
+    enable = true;
+    runAsService = true;
+    config = {
+      search.placeholder = "Search...";
+      ui.fullscreen = true;
+      # Add more walker config here as needed
+    };
+  };
+
   programs.bat.enable = true;
 
   services.ssh-agent.enable = true;
@@ -13,18 +30,13 @@
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "/home/alex/nixos";
   };
 
   programs.kitty.enable = true;
 
   programs.nushell = {
     enable = true;
-    environmentVariables = {
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-      NH_FLAKE = "/home/alex/nixos";
-    };
+    environmentVariables = envVars;
     settings = {
       show_banner = false;
     };

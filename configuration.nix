@@ -5,9 +5,36 @@
     ./hardware-configuration.nix
   ];
 
+  nix.settings = {
+    extra-substituters = [
+      "https://walker.cachix.org"
+      "https://walker-git.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM="
+      "walker-git.cachix.org-1:vmC0ocfPWh0S/vRAQGtChuiZBTAe4wiKDeyyXM0/7pM="
+    ];
+  };
+
   networking.networkmanager.enable = true;
 
   hardware.bluetooth.enable = true;
+
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    supportedLocales = [ "en_US.UTF-8/UTF-8" ];
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
+    };
+  };
 
   programs.hyprland.enable = true;
 
@@ -26,6 +53,13 @@
         exec start-hyprland
       fi
     '';
+  };
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports for Steam Local Network Game Transfers
   };
 
   services.upower.enable = true;
