@@ -20,6 +20,11 @@
 
   programs.nushell = {
     enable = true;
+    environmentVariables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+      NH_FLAKE = "/home/alex/nixos";
+    };
     settings = {
       show_banner = false;
     };
