@@ -16,10 +16,6 @@
     ];
   };
 
-  environment.sessionVariables = {
-    STEAM_FORCE_DESKTOPUI_SCALING = "2";
-  };
-
   networking.networkmanager.enable = true;
 
   hardware.bluetooth.enable = true;

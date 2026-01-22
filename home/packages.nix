@@ -8,6 +8,15 @@ in
     inputs.walker.homeManagerModules.default
   ];
 
+  programs.onedrive = {
+    enable = true;
+    settings = {
+      sync_root_files = "true";
+    };
+  };
+
+  home.file.".config/onedrive/sync_list".source = ./dotfiles/onedrive/sync_list;
+
   programs.walker = {
     enable = true;
     runAsService = true;
