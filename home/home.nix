@@ -11,8 +11,7 @@ in
 {
   home.username = "alex";
   home.homeDirectory = "/home/alex";
-  home.stateVersion = "25.11";
-
+  home.stateVersion = "25.11"; # DO NOT TOUCH
   home.sessionVariables = env;
   systemd.user.sessionVariables = env;
 
