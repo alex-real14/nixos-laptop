@@ -65,6 +65,7 @@
   services.upower.enable = true;
   services.tuned.enable = true;
   services.getty.autologinUser = "alex";
+  services.onedrive.enable = true;
 
   environment.systemPackages = with pkgs; [
     brightnessctl

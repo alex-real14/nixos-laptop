@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }:
 
 let
-  envVars = import ./env-vars.nix;
+  envVars = import ./env.nix;
 in
 {
   imports = [
