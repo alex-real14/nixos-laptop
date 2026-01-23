@@ -8,5 +8,5 @@
     };
   };
 
-  home.file.".config/onedrive/sync_list".source = ../../dotfiles/onedrive/sync_list;
+  home.file.".config/onedrive/sync_list".source = ./sync_list;
 }

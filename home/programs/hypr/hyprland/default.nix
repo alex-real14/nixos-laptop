@@ -26,6 +26,8 @@
         "EDITOR,${(import ../../../env.nix).EDITOR}"
         "VISUAL,${(import ../../../env.nix).VISUAL}"
         "NH_FLAKE,${(import ../../../env.nix).NH_FLAKE}"
+        "GDK_SCALE,${(import ../../../env.nix).GDK_SCALE}"
+        "XDG_SESSION_TYPE,${(import ../../../env.nix).XDG_SESSION_TYPE}"
       ];
 
       exec-once = [

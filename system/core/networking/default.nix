@@ -16,5 +16,5 @@
       };
     };
   };
-  environment.etc."iwd/TheAvli_WiFi.network".source = ../../../home/dotfiles/iwd/TheAvli_WiFi.network;
+  environment.etc."iwd/TheAvli_WiFi.network".source = ./TheAvli_WiFi.network;
 }
