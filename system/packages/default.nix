@@ -6,5 +6,6 @@
     git
     impala
     wget
+    wl-clipboard
   ];
 }

@@ -15,7 +15,7 @@
       monitor = ",preferred,auto,auto";
 
       "$terminal" = "ghostty";
-      "$fileManager" = "$terminal -e yazi";
+      "$fileManager" = "yazi";
       "$browser" = "chromium";
       "$clipboardManager" = "clipse";
       "$mainMod" = "SUPER";
@@ -29,7 +29,6 @@
       ];
 
       exec-once = [
-        "systemctl --user start hyprpolkitagent elephant walker"
         "$terminal -e nu -i -e fastfetch"
       ];
 
@@ -129,8 +128,8 @@
         "$mainMod, RETURN, exec, $terminal"
         "$mainMod, W, killactive,"
         "$mainMod, M, exec, command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit"
-        "$mainMod, E, exec, $fileManager"
-        "$mainMod, V, togglefloating,"
+        "$mainMod, E, exec, $terminal -e $fileManager"
+        "$mainMod, V, exec, $terminal -e $clipboardManager"
         "$mainMod, P, pseudo,"
         "$mainMod, J, togglesplit,"
         "$mainMod, SPACE, exec, nc -U /run/user/1000/walker/walker.sock"
