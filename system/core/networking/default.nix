@@ -3,7 +3,7 @@
 {
   networking = {
     networkmanager.enable = false;
-    hostName = "nixos-laptop";
+    hostName = "laptop";
     wireless.iwd = {
       enable = true;
       settings = {

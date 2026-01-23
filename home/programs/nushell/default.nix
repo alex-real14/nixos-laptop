@@ -14,6 +14,7 @@
     shellAliases = {
       home = "cd ~/nixos/home";
       nixos = "cd ~/nixos";
+      hconf = "vim ~/nixos/home/programs/hypr/hyprland/default.nix";
     };
   };
 }

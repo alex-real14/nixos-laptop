@@ -5,6 +5,7 @@
     brightnessctl
     git
     impala
+    tree
     wget
     wl-clipboard
   ];

@@ -127,22 +127,26 @@
       };
 
       bind = [
-        "$mainMod, RETURN, exec, $terminal"
-        "$mainMod, W, killactive,"
-        "$mainMod, M, exec, command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit"
-        "$mainMod, E, exec, $terminal -e $fileManager"
-        "$mainMod, V, exec, $terminal -e $clipboardManager"
-        "$mainMod, P, pseudo,"
-        "$mainMod, J, togglesplit,"
-        "$mainMod, SPACE, exec, nc -U /run/user/1000/walker/walker.sock"
         "$mainMod, B, exec, $browser"
-        "$mainMod, Y, exec, $browser --app=https://youtube.com"
+        "$mainMod SHIFT, B, exec, btop"
+        "$mainMod, E, exec, $terminal -e $fileManager"
+        "$mainMod, G, exec, $browser --app=https://gemini.google.com"
         "$mainMod, H, movefocus, l"
-        "$mainMod, L, movefocus, r"
-        "$mainMod, K, movefocus, u"
         "$mainMod, J, movefocus, d"
+        "$mainMod, K, movefocus, u"
+        "$mainMod, L, movefocus, r"
+        "$mainMod, M, exec, command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit"
+        "$mainMod, N, togglesplit,"
+        "$mainMod, O, exec, $browser --app=https://outlook.office.com"
+        "$mainMod, P, pseudo,"
         "$mainMod, S, togglespecialworkspace, magic"
         "$mainMod SHIFT, S, movetoworkspace, special:magic"
+        "$mainMod, T, exec, $browser --app=https://teams.microsoft.com"
+        "$mainMod, V, exec, $terminal -e $clipboardManager"
+        "$mainMod, W, killactive,"
+        "$mainMod, Y, exec, $browser --app=https://youtube.com"
+        "$mainMod, RETURN, exec, $terminal"
+        "$mainMod, SPACE, exec, nc -U /run/user/1000/walker/walker.sock"
       ]
       ++ (builtins.concatLists (
         builtins.genList (
