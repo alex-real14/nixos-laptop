@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  inputs,
-  ...
-}:
+{ ... }:
 
 let
   env = import ./env.nix;
@@ -20,8 +15,4 @@ in
     ./programs
     ./services
   ];
-
-  home.file.".config/hypr/env.conf".text = lib.concatStringsSep "\n" (
-    lib.mapAttrsToList (k: v: "env = ${k},${v}") env
-  );
 }

@@ -5,6 +5,7 @@
     brightnessctl
     chromium
     git
+    impala
     wget
   ];
 }

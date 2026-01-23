@@ -16,7 +16,27 @@
       selection_wrap = true;
       hide_action_hints = true;
       hide_quick_activation = true;
+
+      search.preferred = [
+        "desktop_applications"
+        "impala"
+        "clipboard"
+      ];
+
+      plugins = [
+        {
+          name = "impala";
+          prefix = "wifi";
+          switcher_only = false;
+        }
+        {
+          name = "clipboard";
+          prefix = "c";
+          switcher_only = false;
+        }
+      ];
     };
+
     themes."tokyo-night-storm" = {
       style = builtins.readFile ./walker.css;
       layouts = {

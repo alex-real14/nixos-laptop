@@ -1,0 +1,8 @@
+[Security]
+Passphrase=brain626proud
+
+[Settings]
+AutoConnect=true
+
+[Network]
+EnableIPv6=true
