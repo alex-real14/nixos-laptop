@@ -9,12 +9,12 @@
         type = "auto";
         source = "";
         padding = {
-          top = 0;
+          top = 3;
           left = 0;
           right = 4;
         };
         printRemaining = true;
-        preserveAspectRatio = false;
+        preserveAspectRatio = true;
         recache = false;
         position = "left";
         chafa = {
@@ -74,6 +74,7 @@
         detectVersion = true;
       };
       modules = [
+        "break"
         {
           type = "title";
           key = " ";
@@ -187,7 +188,6 @@
           type = "locale";
           keyIcon = "";
         }
-        "break"
       ];
     };
   };

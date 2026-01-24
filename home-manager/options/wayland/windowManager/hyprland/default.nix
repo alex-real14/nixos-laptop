@@ -28,13 +28,15 @@
         "NH_FLAKE,${(import ../../../../env.nix).NH_FLAKE}"
         "GDK_SCALE,${(import ../../../../env.nix).GDK_SCALE}"
         "XDG_SESSION_TYPE,${(import ../../../../env.nix).XDG_SESSION_TYPE}"
-        "GTK_THEME,${(import ../../../../env.nix).GTK_THEME}"
         "XDG_CURRENT_DESKTOP,${(import ../../../../env.nix).XDG_CURRENT_DESKTOP}"
         "XDG_SESSION_DESKTOP,${(import ../../../../env.nix).XDG_SESSION_DESKTOP}"
-        "GDK_BACKEND,${(import ../../../../env.nix).GDK_BACKEND}"
       ];
 
       exec-once = [
+        "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
+        "gsettings set org.gnome.desktop.interface gtk-theme 'TokyoNight-Storm'"
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "kvantummanager --set TokyoNight-Storm"
         "$terminal -e nu -i -e fastfetch"
       ];
 
@@ -132,7 +134,7 @@
 
       bind = [
         "$mainMod, B, exec, sh -c \"hyprctl clients | grep -q 'class: chromium-browser' && hyprctl dispatch focuswindow 'class:chromium-browser' || $browser\""
-        "$mainMod SHIFT, B, exec, btop"
+        "$mainMod SHIFT, B, exec, sh -c \"hyprctl clients | grep -q 'title: ^btop$' && hyprctl dispatch focuswindow 'title:^btop$' || $terminal --title btop -e btop\""
         "$mainMod, E, exec, $terminal -e $fileManager"
         "$mainMod, G, exec, sh -c \"hyprctl clients | grep -q 'class: chrome-gemini.google.com__-Default' && hyprctl dispatch focuswindow 'class:chrome-gemini.google.com__-Default' || $browser --app=https://gemini.google.com\""
         "$mainMod, H, movefocus, l"
@@ -191,6 +193,10 @@
         "no_focus on, match:class ^$, match:title ^$"
         "float on, match:class hyprland-run"
         "move 20 (monitor_h-120), match:class hyprland-run"
+
+        # float btop
+        "float on, size 80% 80%, center on, opacity 0.9 override 0.8 override, match:initial_title ^btop$"
+
         "workspace 2, match:initial_class ^chromium-browser$"
         "workspace 3, match:initial_class ^chrome-gemini\.google\.com__-Default$"
       ];
