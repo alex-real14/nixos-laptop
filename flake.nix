@@ -1,5 +1,5 @@
 {
-  description = "My NIXOS implementation";
+  description = "Laptop";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -45,7 +45,7 @@
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs; };
               users.alex = {
-                imports = [ ./home/home.nix ];
+                imports = [ ./home-manager/home.nix ];
               };
               backupFileExtension = "backup";
             };

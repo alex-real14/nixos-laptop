@@ -3,7 +3,7 @@
 {
   programs.nushell = {
     enable = true;
-    environmentVariables = import ../../env.nix;
+    environmentVariables = import ../../../env.nix;
     settings = {
       show_banner = false;
     };
@@ -12,9 +12,9 @@
       tv init nu | save -f ($nu.data-dir | path join "vendor/autoload/tv.nu")
     '';
     shellAliases = {
-      home = "cd ~/nixos/home";
+      home = "cd ~/nixos/home-manager";
       nixos = "cd ~/nixos";
-      hconf = "vim ~/nixos/home/programs/hypr/hyprland/default.nix";
+      hconf = "vim ~/nixos/home-manager/options/wayland/windowManager/hyprland/default.nix";
     };
   };
 }

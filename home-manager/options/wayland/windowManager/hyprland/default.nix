@@ -23,11 +23,15 @@
       env = [
         "XCURSOR_SIZE,24"
         "HYPRCURSOR_SIZE,24"
-        "EDITOR,${(import ../../../env.nix).EDITOR}"
-        "VISUAL,${(import ../../../env.nix).VISUAL}"
-        "NH_FLAKE,${(import ../../../env.nix).NH_FLAKE}"
-        "GDK_SCALE,${(import ../../../env.nix).GDK_SCALE}"
-        "XDG_SESSION_TYPE,${(import ../../../env.nix).XDG_SESSION_TYPE}"
+        "EDITOR,${(import ../../../../env.nix).EDITOR}"
+        "VISUAL,${(import ../../../../env.nix).VISUAL}"
+        "NH_FLAKE,${(import ../../../../env.nix).NH_FLAKE}"
+        "GDK_SCALE,${(import ../../../../env.nix).GDK_SCALE}"
+        "XDG_SESSION_TYPE,${(import ../../../../env.nix).XDG_SESSION_TYPE}"
+        "GTK_THEME,${(import ../../../../env.nix).GTK_THEME}"
+        "XDG_CURRENT_DESKTOP,${(import ../../../../env.nix).XDG_CURRENT_DESKTOP}"
+        "XDG_SESSION_DESKTOP,${(import ../../../../env.nix).XDG_SESSION_DESKTOP}"
+        "GDK_BACKEND,${(import ../../../../env.nix).GDK_BACKEND}"
       ];
 
       exec-once = [
@@ -127,10 +131,10 @@
       };
 
       bind = [
-        "$mainMod, B, exec, $browser"
+        "$mainMod, B, exec, sh -c \"hyprctl clients | grep -q 'class: chromium-browser' && hyprctl dispatch focuswindow 'class:chromium-browser' || $browser\""
         "$mainMod SHIFT, B, exec, btop"
         "$mainMod, E, exec, $terminal -e $fileManager"
-        "$mainMod, G, exec, $browser --app=https://gemini.google.com"
+        "$mainMod, G, exec, sh -c \"hyprctl clients | grep -q 'class: chrome-gemini.google.com__-Default' && hyprctl dispatch focuswindow 'class:chrome-gemini.google.com__-Default' || $browser --app=https://gemini.google.com\""
         "$mainMod, H, movefocus, l"
         "$mainMod, J, movefocus, d"
         "$mainMod, K, movefocus, u"
@@ -187,6 +191,8 @@
         "no_focus on, match:class ^$, match:title ^$"
         "float on, match:class hyprland-run"
         "move 20 (monitor_h-120), match:class hyprland-run"
+        "workspace 2, match:initial_class ^chromium-browser$"
+        "workspace 3, match:initial_class ^chrome-gemini\.google\.com__-Default$"
       ];
     };
   };

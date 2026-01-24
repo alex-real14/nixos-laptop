@@ -3,7 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./system
+    ./nixpkgs
   ];
 
   system.stateVersion = "25.11"; # DO NOT TOUCH

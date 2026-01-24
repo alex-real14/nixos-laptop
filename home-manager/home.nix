@@ -11,8 +11,6 @@ in
   systemd.user.sessionVariables = env;
 
   imports = [
-    ./packages
-    ./programs
-    ./services
+    ./options
   ];
 }
