@@ -5,5 +5,8 @@
 {
   programs.chromium = {
     enable = true;
+    commandLineArgs = [
+      "--prefer-native-proxy"
+    ];
   };
 }

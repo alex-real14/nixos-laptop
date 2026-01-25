@@ -45,7 +45,7 @@
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs; };
               users.alex = {
-                imports = [ ./home-manager/home.nix ];
+                imports = [ ./home-manager ];
               };
               backupFileExtension = "backup";
             };

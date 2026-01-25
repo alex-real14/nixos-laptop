@@ -9,7 +9,7 @@
         type = "auto";
         source = "";
         padding = {
-          top = 3;
+          top = 1;
           left = 0;
           right = 4;
         };

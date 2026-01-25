@@ -1,5 +1,8 @@
 { ... }:
 
+let
+  systemMonitor = "btop";
+in
 {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -19,6 +22,7 @@
       "$browser" = "chromium";
       "$clipboardManager" = "clipse";
       "$mainMod" = "SUPER";
+      "$systemMonitor" = "btop";
 
       env = [
         "XCURSOR_SIZE,24"
@@ -30,13 +34,12 @@
         "XDG_SESSION_TYPE,${(import ../../../../env.nix).XDG_SESSION_TYPE}"
         "XDG_CURRENT_DESKTOP,${(import ../../../../env.nix).XDG_CURRENT_DESKTOP}"
         "XDG_SESSION_DESKTOP,${(import ../../../../env.nix).XDG_SESSION_DESKTOP}"
+        "GTK_USE_PORTAL,${(import ../../../../env.nix).XDG_SESSION_DESKTOP}"
       ];
 
       exec-once = [
-        "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
-        "gsettings set org.gnome.desktop.interface gtk-theme 'TokyoNight-Storm'"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "kvantummanager --set TokyoNight-Storm"
+        "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "$terminal -e nu -i -e fastfetch"
       ];
 
@@ -134,7 +137,7 @@
 
       bind = [
         "$mainMod, B, exec, sh -c \"hyprctl clients | grep -q 'class: chromium-browser' && hyprctl dispatch focuswindow 'class:chromium-browser' || $browser\""
-        "$mainMod SHIFT, B, exec, sh -c \"hyprctl clients | grep -q 'title: ^btop$' && hyprctl dispatch focuswindow 'title:^btop$' || $terminal --title btop -e btop\""
+        "$mainMod SHIFT, B, exec, sh -c \"hyprctl clients | grep -q 'class: ghostty.$systemMonitor' && hyprctl dispatch focuswindow 'class:ghostty.$systemMonitor' || $terminal --class=ghostty.$systemMonitor -e $systemMonitor\""
         "$mainMod, E, exec, $terminal -e $fileManager"
         "$mainMod, G, exec, sh -c \"hyprctl clients | grep -q 'class: chrome-gemini.google.com__-Default' && hyprctl dispatch focuswindow 'class:chrome-gemini.google.com__-Default' || $browser --app=https://gemini.google.com\""
         "$mainMod, H, movefocus, l"
@@ -195,8 +198,7 @@
         "move 20 (monitor_h-120), match:class hyprland-run"
 
         # float btop
-        "float on, size 80% 80%, center on, opacity 0.9 override 0.8 override, match:initial_title ^btop$"
-
+        "float on, size 80% 80%, center on, opacity 0.9 override 0.8 override,match:class ^ghostty\.${systemMonitor}$"
         "workspace 2, match:initial_class ^chromium-browser$"
         "workspace 3, match:initial_class ^chrome-gemini\.google\.com__-Default$"
       ];
