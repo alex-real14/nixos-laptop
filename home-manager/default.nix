@@ -1,16 +1,22 @@
-{ ... }:
+{ inputs, ... }:
 
-let
-  env = import ./env.nix;
-in
 {
-  home.username = "alex";
-  home.homeDirectory = "/home/alex";
-  home.stateVersion = "25.11"; # DO NOT TOUCH
-  home.sessionVariables = env;
-  systemd.user.sessionVariables = env;
-
   imports = [
-    ./options
+    inputs.home-manager.nixosModules.home-manager
   ];
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = { inherit inputs; };
+    users.alex = {
+      home = {
+        username = "alex";
+        homeDirectory = "/home/alex";
+        stateVersion = "25.11"; # DO NOT TOUCH
+        sessionVariables = import ./env.nix;
+      };
+      imports = [ ./options ];
+    };
+    backupFileExtension = "backup";
+  };
 }
