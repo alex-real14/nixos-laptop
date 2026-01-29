@@ -1,9 +1,11 @@
-{ ... }:
+{ hostType, ... }:
 
 {
   networking = {
+    hostName = hostType;
+
     networkmanager.enable = false;
-    hostName = "laptop";
+
     wireless.iwd = {
       enable = true;
       settings = {

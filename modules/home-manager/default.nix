@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ hostType, inputs, ... }:
 
 {
   imports = [
@@ -7,7 +7,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs hostType; };
     users.alex = {
       home = {
         username = "alex";

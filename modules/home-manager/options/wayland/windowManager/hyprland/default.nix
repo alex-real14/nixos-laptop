@@ -15,7 +15,10 @@ in
     };
 
     settings = {
-      monitor = ",preferred,auto,auto";
+      monitor = [
+        "HDMI-A-1, preferred, auto, 1"
+        "eDP-1, preferred, auto, 2"
+      ];
 
       "$terminal" = "ghostty";
       "$fileManager" = "yazi";
@@ -189,6 +192,8 @@ in
         ", XF86AudioPause, exec, playerctl play-pause"
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioPrev, exec, playerctl previous"
+        ", switch:on:Lid Switch, exec, hyprctl keyword monitor 'eDP-1,disable'"
+        ", switch:off:Lid Switch, exec, hyprctl keyword monitor 'eDP-1,preferred,auto,2'"
       ];
 
       windowrule = [

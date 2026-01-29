@@ -3,7 +3,8 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./nixpkgs
+    ../../modules/nixos
+    ../../modules/home-manager
   ];
 
   system.stateVersion = "25.11"; # DO NOT TOUCH

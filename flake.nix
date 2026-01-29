@@ -1,6 +1,4 @@
 {
-  description = "Laptop";
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -25,14 +23,25 @@
     };
   };
 
-  outputs = inputs: {
-    nixosConfigurations.laptop = inputs.nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./configuration.nix
-        ./home-manager
-      ];
+  outputs =
+    { self, nixpkgs, ... }@inputs:
+    let
+      mkSystem =
+        host: hostType:
+        nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs hostType;
+          };
+          modules = [
+            ./hosts/${host}/configuration.nix
+          ];
+        };
+    in
+    {
+      nixosConfigurations = {
+        laptop = mkSystem "laptop" "laptop";
+        desktop = mkSystem "desktop" "desktop";
+      };
     };
-  };
 }
